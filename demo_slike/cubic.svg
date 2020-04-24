@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 99.900002 99.900002"
+   height="99.900002mm"
+   width="99.900002mm">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-26.40119,-161.62738)"
+     id="layer1">
+    <g
+       id="layer1-1"
+       transform="translate(-24.190477,30.238095)">
+      <g
+         id="layer1-2"
+         transform="translate(-18.142857,52.916667)">
+        <g
+           id="g186"
+           transform="matrix(0.1,0,0,0.1,68.684524,78.422619)">
+          <rect
+             id="rect14"
+             height="998"
+             width="998"
+             y="1"
+             x="1"
+             style="fill:none;stroke:#0000ff;stroke-width:1" />
+          <polyline
+             points="100,200 100,100"
+             id="poly1"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <polyline
+             id="polyline17"
+             points="400,100 400,200"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <path
+             id="path19"
+             d="m 100,200 c 0,-100 300,-100 300,0"
+             style="fill:none;stroke:#ff0000;stroke-width:5" />
+          <circle
+             id="circle21"
+             r="10"
+             cy="200"
+             cx="100"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle23"
+             r="10"
+             cy="200"
+             cx="400"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle25"
+             r="10"
+             cy="100"
+             cx="100"
+             class="CtlPoint" />
+          <circle
+             id="circle27"
+             r="10"
+             cy="100"
+             cx="400"
+             class="CtlPoint" />
+          <text
+             id="text29"
+             y="275"
+             x="250"
+             font-size="22"
+             style="font-size:22px;font-family:Verdana;text-anchor:middle">M100,200 C100,100 400,100 400,200</text>
+          <polyline
+             id="polyline31"
+             points="100,500 25,400"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <polyline
+             id="polyline33"
+             points="475,400 400,500"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <path
+             id="path35"
+             d="M 100,500 C 25,400 475,400 400,500"
+             style="fill:none;stroke:#ff0000;stroke-width:5" />
+          <circle
+             id="circle37"
+             r="10"
+             cy="500"
+             cx="100"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle39"
+             r="10"
+             cy="500"
+             cx="400"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle41"
+             r="10"
+             cy="400"
+             cx="25"
+             style="fill:#888888;stroke:none" />
+          <circle
+             id="circle43"
+             r="10"
+             cy="400"
+             cx="475"
+             style="fill:#888888;stroke:none" />
+          <text
+             id="text45"
+             y="575"
+             x="250"
+             font-size="22"
+             style="font-size:22px;font-family:Verdana;text-anchor:middle">M100,500 C25,400 475,400 400,500</text>
+          <polyline
+             id="polyline47"
+             points="100,800 175,700"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <polyline
+             id="polyline49"
+             points="325,700 400,800"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <path
+             id="path51"
+             d="m 100,800 c 75,-100 225,-100 300,0"
+             style="fill:none;stroke:#ff0000;stroke-width:5" />
+          <circle
+             id="circle53"
+             r="10"
+             cy="800"
+             cx="100"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle55"
+             r="10"
+             cy="800"
+             cx="400"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle57"
+             r="10"
+             cy="700"
+             cx="175"
+             style="fill:#888888;stroke:none" />
+          <circle
+             id="circle59"
+             r="10"
+             cy="700"
+             cx="325"
+             style="fill:#888888;stroke:none" />
+          <text
+             id="text61"
+             y="875"
+             x="250"
+             font-size="22"
+             style="font-size:22px;font-family:Verdana;text-anchor:middle">M100,800 C175,700 325,700 400,800</text>
+          <polyline
+             id="polyline63"
+             points="600,200 675,100"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <polyline
+             id="polyline65"
+             points="975,100 900,200"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <path
+             id="path67"
+             d="m 600,200 c 75,-100 375,-100 300,0"
+             style="fill:none;stroke:#ff0000;stroke-width:5" />
+          <circle
+             id="circle69"
+             r="10"
+             cy="200"
+             cx="600"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle71"
+             r="10"
+             cy="200"
+             cx="900"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle73"
+             r="10"
+             cy="100"
+             cx="675"
+             style="fill:#888888;stroke:none" />
+          <circle
+             id="circle75"
+             r="10"
+             cy="100"
+             cx="975"
+             style="fill:#888888;stroke:none" />
+          <text
+             id="text77"
+             y="275"
+             x="750"
+             font-size="22"
+             style="font-size:22px;font-family:Verdana;text-anchor:middle">M600,200 C675,100 975,100 900,200</text>
+          <polyline
+             id="polyline79"
+             points="600,500 600,350"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <polyline
+             id="polyline81"
+             points="900,650 900,500"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <path
+             id="path83"
+             d="m 600,500 c 0,-150 300,150 300,0"
+             style="fill:none;stroke:#ff0000;stroke-width:5" />
+          <circle
+             id="circle85"
+             r="10"
+             cy="500"
+             cx="600"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle87"
+             r="10"
+             cy="500"
+             cx="900"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle89"
+             r="10"
+             cy="350"
+             cx="600"
+             style="fill:#888888;stroke:none" />
+          <circle
+             id="circle91"
+             r="10"
+             cy="650"
+             cx="900"
+             style="fill:#888888;stroke:none" />
+          <text
+             id="text93"
+             y="575"
+             x="750"
+             font-size="22"
+             style="font-size:22px;font-family:Verdana;text-anchor:middle">M600,500 C600,350 900,650 900,500</text>
+          <polyline
+             id="polyline95"
+             points="600,800 625,700"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <polyline
+             id="polyline97"
+             points="725,700 750,800"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <polyline
+             id="polyline99"
+             points="750,800 775,900"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <polyline
+             id="polyline101"
+             points="875,900 900,800"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <path
+             id="path103"
+             d="m 600,800 c 25,-100 125,-100 150,0 25,100 125,100 150,0"
+             style="fill:none;stroke:#ff0000;stroke-width:5" />
+          <circle
+             id="circle105"
+             r="10"
+             cy="800"
+             cx="600"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle107"
+             r="10"
+             cy="800"
+             cx="750"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle109"
+             r="10"
+             cy="800"
+             cx="900"
+             style="fill:none;stroke:#888888;stroke-width:2" />
+          <circle
+             id="circle111"
+             r="10"
+             cy="700"
+             cx="625"
+             style="fill:#888888;stroke:none" />
+          <circle
+             id="circle113"
+             r="10"
+             cy="700"
+             cx="725"
+             style="fill:#888888;stroke:none" />
+          <circle
+             id="circle115"
+             r="10"
+             cy="900"
+             cx="875"
+             style="fill:#888888;stroke:none" />
+          <circle
+             id="circle117"
+             r="9"
+             cy="900"
+             cx="775"
+             style="fill:none;stroke:#0000ff;stroke-width:4" />
+          <text
+             id="text119"
+             y="945"
+             x="750"
+             font-size="22"
+             style="font-size:22px;font-family:Verdana;text-anchor:middle">M600,800 C625,700 725,700 750,800</text>
+          <text
+             id="text121"
+             y="975"
+             x="750"
+             font-size="22"
+             style="font-size:22px;font-family:Verdana;text-anchor:middle">S875,900 900,800</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
