@@ -2,8 +2,8 @@
 
 #############################################################################
 ##
-## Copyright (c) 2020 Jernej Pangerc
-## See LICENCE file for details [1].
+# Copyright (c) 2020 Jernej Pangerc
+# See LICENCE file for details [1].
 ##
 #############################################################################
 
@@ -30,6 +30,7 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
         self.runButton.clicked.connect(self.run)
         self.stepFwdButton.clicked.connect(self.stepFwd)
         self.stepBackButton.clicked.connect(self.stepBack)
+        self.stepBackButton.setDisabled(True)
         self.graphicsView.setScene(QtWidgets.QGraphicsScene(self.graphicsView))
         self.scene = self.graphicsView.scene()
 
@@ -41,10 +42,23 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
         self.timer.setInterval(100)
         self.timer.timeout.connect(lambda: self.startNewThread('forward'))
 
+    def clearSimulation(self):
+        self.isFirstRun = True
+        self.pathIndex = 0
+        self.scene.clear()
+        self.clearScene()
+        self.setLineItems()
+
     def wheelEvent(self, event):
         factor = pow(1.2, event.angleDelta().y() / 240.0)
         self.graphicsView.scale(factor, factor)
         event.accept()
+
+    def closeEvent(self, event):
+        self.runButton.setText('Run')
+        self.stepFwdButton.setEnabled(True)
+        self.stepBackButton.setDisabled(True)
+        self.timer.stop()
 
     def run(self):
         if self.runButton.text() == 'Run':
@@ -54,21 +68,7 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
 
             if self.isFirstRun:
                 self.scene = self.graphicsView.scene()
-                self.clearScene()
-
-                # Set outline for A4 paper size
-                outlineItem = QtWidgets.QGraphicsRectItem(0, 0, 210, 297)
-                outline = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.DashLine)
-                outline.setCosmetic(True)
-                outlineItem.setPen(outline)
-                outlineItem.setBrush(QtGui.QBrush(QtCore.Qt.NoBrush))
-                outlineItem.setVisible(True)
-                outlineItem.setZValue(1)
-
-                self.scene.addItem(outlineItem)
-                #self.worker = DrawPlot(self.graphicsView)
-                self.pathIndex = 0
-                self.xIndex = 1
+                self.clearScene()                
                 self.timer.start()
 
             else:
@@ -85,19 +85,7 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
         if self.isFirstRun:
             self.scene = self.graphicsView.scene()
             self.clearScene()
-
-            # Set outline for A4 paper size
-            outlineItem = QtWidgets.QGraphicsRectItem(0, 0, 210, 297)
-            outline = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.DashLine)
-            outline.setCosmetic(True)
-            outlineItem.setPen(outline)
-            outlineItem.setBrush(QtGui.QBrush(QtCore.Qt.NoBrush))
-            outlineItem.setVisible(True)
-            outlineItem.setZValue(1)
-
-            self.scene.addItem(outlineItem)
-            self.scene.setSceneRect(
-                outlineItem.boundingRect().adjusted(-10, -10, 10, 10))
+            self.stepBackButton.setEnabled(True)
 
             self.isFirstRun = False
 
@@ -131,6 +119,7 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
                 self.paths.append(path)
 
     def setLineItems(self):
+        self.lines = []
         for path in self.paths:
             for xIndex in range(1, len(path['x'])):
                 x1 = path['x'][xIndex-1]
@@ -166,16 +155,28 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
             # self.timer.timeout.disconnect(self.startNewThread)
             self.runButton.setText('Run')
             self.stepFwdButton.setEnabled(True)
-            self.stepBackButton.setEnabled(True)
+            self.stepBackButton.setDisabled(True)
             self.pathIndex = 0
             self.isFirstRun = True
 
     def clearScene(self):
-        #scene = self.graphicsView.scene()
         items = self.scene.items()
         if len(items) > 0:
             for item in items:
                 self.scene.removeItem(item)
+
+        # Set outline for A4 paper size
+        outlineItem = QtWidgets.QGraphicsRectItem(0, 0, 210, 297)
+        outline = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.DashLine)
+        outline.setCosmetic(True)
+        outlineItem.setPen(outline)
+        outlineItem.setBrush(QtGui.QBrush(QtCore.Qt.NoBrush))
+        outlineItem.setVisible(True)
+        outlineItem.setZValue(1)
+
+        self.scene.addItem(outlineItem)
+        self.scene.setSceneRect(
+            outlineItem.boundingRect().adjusted(-10, -10, 10, 10))
 
 
 class AppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -184,10 +185,8 @@ class AppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.simDialog = DialogWindow()
-        self.simDialog.finished.connect(self.closeDialog)
-
         self.graphicsView.run()
-        #self.view = SvgView()
+
         self.setCentralWidget(self.centralwidget)
         self.actionOpen.triggered.connect(self.openFile)
         self.actionExit.triggered.connect(self.exitProgram)
@@ -196,25 +195,23 @@ class AppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.graphicsView.setViewBackground)
         self.actionOutline.triggered.connect(self.graphicsView.setViewOutline)
 
-        #----------------test------------------------#
-
         self.treeWidget.itemClicked.connect(self.checkBoxClick)
 
         self.name = ''
         self.path = ''
         self.temp = ''
 
-    def treeViev(self):  # fc:startStop AppWindow treeView
+    def treeView(self):  # fc:startStop AppWindow treeView
         self.treeWidget.clear()  # fc:middleware "Clear tree struct" QTreeWidget.clear()
 
         tree = ET.parse(self.path)
         root = tree.getroot()
         namespace = '{' + re.split('[{}]', root.tag)[1] + '}'
 
-        elements = Elements(root, self.treeWidget, namespace)
+        self.elements = Elements(self.treeWidget, namespace)
+        self.elements.initSVG(root)
 
-        classes = elements.getClasses()
-        self.simDialog.initialise()
+        classes = self.elements.setVisibility(root, [])
         self.simDialog.setElementsClasses(classes)
         self.simDialog.setSimulationPath()
         self.simDialog.setLineItems()
@@ -241,14 +238,15 @@ class AppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         tree = ET.parse(self.temp)
         root = tree.getroot()
-        namespace = '{' + re.split('[{}]', root.tag)[1] + '}'
-        HideElements(root, items, namespace)
+        classes = self.elements.setVisibility(root, items)
+        self.simDialog.setElementsClasses(classes)
+        self.simDialog.setSimulationPath()
+        self.simDialog.setLineItems()
+
         tree.write(self.temp)
 
         tmp = QtCore.QFile(self.temp)
         self.graphicsView.openFile(tmp)
-
-        #-----------------test konec--------------------#
 
     def openFile(self, path=None):
         if not path:
@@ -259,7 +257,8 @@ class AppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.path = path
             self.name = os.path.split(path)[1]
 
-            self.treeViev()
+            self.simDialog.initialise()
+            self.treeView()
             tmp = QtCore.QFile(self.temp)
             self.graphicsView.openFile(tmp)
             self.treeWidget.setHeaderLabel(self.name)
@@ -270,9 +269,7 @@ class AppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def simulation(self):
         self.simDialog.show()
-
-    def closeDialog(self, event):
-        print('Close sim dialog')
+        self.simDialog.clearSimulation()
 
     def closeEvent(self, event):
         if w.temp:
@@ -282,9 +279,9 @@ class AppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
 class Elements():
-    def __init__(self, root, tree, namespace):
+    def __init__(self, tree, namespace):
         self.tree = [tree]
-        self.classes = []
+        self.classes = {}
         self.razred = None
         self.indent = 0
         self.namespace = namespace
@@ -295,68 +292,62 @@ class Elements():
                             namespace + 'path',
                             namespace + 'polyline')
 
-        self.printRecur(root)
+    def initSVG(self, root):
+        self.initSVGRecur(root)
 
-    def printRecur(self, root):
-        """Recursively prints the tree."""
-        # print(' '*self.indent + '%s: %s' %
-        #      (root.tag.replace(self.namespace, ''), root.attrib.get('id', root.text)))
-        string = str(root.tag.replace(self.namespace, '')) + \
-            ': ' + str(root.attrib.get('id', root.text))
+    def initSVGRecur(self, root):
+        string = (str(root.tag.replace(self.namespace, '')) +
+                  ': ' + str(root.get('id')))
         parent = QtWidgets.QTreeWidgetItem(self.tree[-1])
         parent.setText(0, string)
         root.set("visibility", "visible")
 
-        var = 'self.razred'  # root.attrib.get('id', root.text)
+        var = 'self.razred'
         classType = root.tag.replace(self.namespace, '')
         clas = classType.capitalize()
-        execStr = var + '=' + clas + \
-            '(args=' + str(root.items()) + ', classType="' + classType + '")'
-        # print(execStr)
+        execStr = (var + '=' + clas +
+                   '(args=' + str(root.items()) + ', classType="' + classType + '")')
+
         exec(execStr)
-        self.classes.append(self.razred)
-        self.indent += 2
+        className = root.get('id')
+        self.classes[className] = self.razred
         parent.setFlags(parent.flags() | Qt.Qt.ItemIsTristate |
                         Qt.Qt.ItemIsUserCheckable)
         self.tree.append(parent)
         for elem in root:
             if elem.tag in self.useElements:
-                self.printRecur(elem)
-        self.indent -= 2
+                self.initSVGRecur(elem)
         parent.setFlags(parent.flags() | Qt.Qt.ItemIsUserCheckable)
         parent.setCheckState(0, Qt.Qt.Checked)
         del(self.tree[-1])
 
-    def getClasses(self):
-        return self.classes
+    def setVisibility(self, root, itemsToHide):
+        self.setVisibilityRecur(root, itemsToHide)
 
+        activeElements = []
+        for element in self.classes:
+            addElement = True
+            for item in itemsToHide:
+                if element == item:
+                    addElement = False
 
-class HideElements:
-    def __init__(self, root, items, namespace):
-        self.items = items
-        self.useElements = (namespace + 'g',
-                            namespace + 'rect',
-                            namespace + 'circle',
-                            namespace + 'ellipse',
-                            namespace + 'path',
-                            namespace + 'text',
-                            namespace + 'polyline')
+            if addElement:
+                activeElements.append(self.classes[element])
 
-        self.printRecur(root)
+        return activeElements
 
-    def printRecur(self, root):
-        """Recursively prints the tree."""
+    def setVisibilityRecur(self, root, items):
         elementID = root.get('id')
         root.set("visibility", "visible")
 
         if elementID:
-            for item in self.items:
+            for item in items:
                 if elementID in item:
                     root.set("visibility", "hidden")
 
         for elem in root:
             if elem.tag in self.useElements:
-                self.printRecur(elem)
+                self.setVisibilityRecur(elem, items)
 
 
 class Rect:

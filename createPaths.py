@@ -13,7 +13,6 @@ import re
 class CreatePaths:
 
     def getRectPath(self, element):
-        print('rect')
         path = {'x': [], 'y': []}
         x = float(element.x)
         y = float(element.y)
@@ -108,7 +107,6 @@ class CreatePaths:
         return path
 
     def getLinePath(self, element):
-        print('line')
         path = {'x': [], 'y': []}
         x1 = float(element.x1)
         x2 = float(element.x2)
@@ -123,7 +121,6 @@ class CreatePaths:
         return path
 
     def getPolylinePath(self, element):
-        print('polyline')
         path = {'x': [], 'y': []}
 
         points = re.split('[, ]', element.points)
@@ -137,7 +134,6 @@ class CreatePaths:
         return path
 
     def getPolygonPath(self, element):
-        print('polygon')
         path = {'x': [], 'y': []}
 
         points = re.split('[, ]', element.points)
