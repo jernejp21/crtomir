@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 #############################################################################
-##
-## Copyright (c) 2020 Jernej Pangerc
-## See LICENCE file for details [2].
-##
+#
+# Copyright (c) 2020 Jernej Pangerc
+# See LICENCE file for details [2].
+#
 #############################################################################
 
 from PyQt5 import QtCore, QtGui, QtWidgets, QtSvg
