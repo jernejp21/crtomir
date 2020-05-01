@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 #############################################################################
-##
+#
 # Copyright (c) 2020 Jernej Pangerc
 # See LICENCE file for details [1].
-##
+#
 #############################################################################
 
 import sys
@@ -17,7 +17,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets, QtSvg, Qt
 from mainwindow import Ui_MainWindow
 from simulation import Ui_Dialog
 from svgview import SvgView
-from createPaths import CreatePaths as cp
+from createPaths import CreateShapePaths as csp
+from createPaths import CreatePathPaths as cpp
 
 
 class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
@@ -68,7 +69,7 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
 
             if self.isFirstRun:
                 self.scene = self.graphicsView.scene()
-                self.clearScene()                
+                self.clearScene()
                 self.timer.start()
 
             else:
@@ -103,19 +104,23 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
         for element in self.elementsClasses:
             path = {'x': [], 'y': []}
             if 'rect' == element.classType:
-                path = cp().getRectPath(element)
+                path = csp().getRectPath(element)
                 self.paths.append(path)
 
             if 'circle' == element.classType:
-                path = cp().getCircPath(element)
+                path = csp().getCircPath(element)
                 self.paths.append(path)
 
             if 'ellipse' == element.classType:
-                path = cp().getEllipsePath(element)
+                path = csp().getEllipsePath(element)
                 self.paths.append(path)
 
             if 'line' == element.classType:
-                path = cp().getLinePath(element)
+                path = csp().getLinePath(element)
+                self.paths.append(path)
+
+            if 'path' == element.classType:
+                path = cpp().getPathPath(element)
                 self.paths.append(path)
 
     def setLineItems(self):
