@@ -21,7 +21,7 @@ from createPaths import CreateShapePaths as csp
 from createPaths import CreatePathPaths as cpp
 
 
-class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
+class SimDialogWindow(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -121,7 +121,7 @@ class DialogWindow(QtWidgets.QDialog, Ui_Dialog):
 
             if 'path' == element.classType:
                 path = cpp().getPathPath(element)
-                self.paths.append(path)
+                self.paths.extend(path)
 
     def setLineItems(self):
         self.lines = []
@@ -189,7 +189,7 @@ class AppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.simDialog = DialogWindow()
+        self.simDialog = SimDialogWindow()
         self.graphicsView.run()
 
         self.setCentralWidget(self.centralwidget)

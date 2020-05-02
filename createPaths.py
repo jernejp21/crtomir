@@ -157,6 +157,7 @@ class CreatePathPaths:
         d = element.d
         dString = d.split()
 
+        self.paths = []
         self.path = {'x': [], 'y': []}
         self.currentPosition = {'x': 0, 'y': 0}
         self.startPosition = {'x': 0, 'y': 0}
@@ -186,11 +187,16 @@ class CreatePathPaths:
                 parameters.append(array)
 
         self.function(pathCommand_current, parameters)
+        self.paths.append(self.path)
 
-        return self.path
+        return self.paths
 
     def function(self, pathCommand, param):
         if pathCommand == 'm':
+            if len(self.path['x']):
+                self.paths.append(self.path)
+            
+            self.path = {'x': [], 'y': []}
             for x, y in param:
                 self.currentPosition['x'] += x
                 self.currentPosition['y'] += y
@@ -200,6 +206,8 @@ class CreatePathPaths:
             self.path['y'].append(self.currentPosition['y'])
 
         if pathCommand == 'z':
+            self.currentPosition['x'] = self.startPosition['x']
+            self.currentPosition['y'] = self.startPosition['y']
             self.path['x'].append(self.startPosition['x'])
             self.path['y'].append(self.startPosition['y'])
 
